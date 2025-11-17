@@ -29,7 +29,7 @@ pipeline {
                               -Dpackaging=jar \
                               -Dfile=target/spring-boot-complete-0.0.1-SNAPSHOT.jar \
                               -DrepositoryId=nexus \
-                              --Durl=http://192.168.1.100:8081/repository/maven-releases/ \
+                              -Durl=http://nexus:8081/repository/maven-releases/ \
                               -Dusername=$USERNAME \
                               -Dpassword=$PASSWORD
                         """
