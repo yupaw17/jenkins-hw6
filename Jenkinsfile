@@ -11,7 +11,9 @@ pipeline {
 
         stage('Build') {
             steps {
+                // Ensure Maven wrapper is executable
                 sh 'chmod +x mvnw'
+                // Build the project and skip tests
                 sh './mvnw clean package -DskipTests'
             }
         }
@@ -26,7 +28,7 @@ pipeline {
                           -Dversion=0.0.1-SNAPSHOT \
                           -Dpackaging=jar \
                           -Dfile=target/spring-boot-complete-0.0.1-SNAPSHOT.jar \
-                          -DrepositoryId=nexus-cred \
+                          -DrepositoryId=nexus \
                           -Durl=http://localhost:8081/repository/maven-releases/
                     """
                 }
