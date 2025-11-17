@@ -24,3 +24,4 @@ Stages:
 ## How to Build
 ```bash
 ./mvnw clean package
+# jenkins-hw6
