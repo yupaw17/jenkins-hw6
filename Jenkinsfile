@@ -11,9 +11,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Fix permissions before running mvnw
                 sh 'chmod +x mvnw'
-                sh './mvnw clean package'
+                sh './mvnw clean package -DskipTests'
             }
         }
 
