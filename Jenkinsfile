@@ -22,10 +22,10 @@ pipeline {
                     sh """
                         mvn deploy:deploy-file \
                           -DgroupId=com.example \
-                          -DartifactId=helloworld \
+                          -DartifactId=spring-boot-complete \
                           -Dversion=0.0.1-SNAPSHOT \
                           -Dpackaging=jar \
-                          -Dfile=target/helloworld-0.0.1-SNAPSHOT.jar \
+                          -Dfile=target/spring-boot-complete-0.0.1-SNAPSHOT.jar \
                           -DrepositoryId=nexus-cred \
                           -Durl=http://localhost:8081/repository/maven-releases/
                     """
