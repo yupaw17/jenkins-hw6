@@ -11,28 +11,29 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Ensure Maven wrapper is executable
                 sh 'chmod +x mvnw'
-                // Build the project and skip tests
                 sh './mvnw clean package -DskipTests'
             }
         }
 
         stage('Publish to Nexus') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'nexus-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh """
-                        ./mvnw deploy:deploy-file \
-                          -DgroupId=com.example \
-                          -DartifactId=spring-boot-complete \
-                          -Dversion=0.0.1-SNAPSHOT \
-                          -Dpackaging=jar \
-                          -Dfile=target/spring-boot-complete-0.0.1-SNAPSHOT.jar \
-                          -DrepositoryId=nexus \
-                          -Durl=http://localhost:8081/repository/maven-releases/ \
-                          -Dusername=$USERNAME \
-                          -Dpassword=$PASSWORD
-                    """
+                dir('.') {
+                    withCredentials([usernamePassword(credentialsId: 'nexus-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh 'chmod +x mvnw'
+                        sh """
+                            ./mvnw deploy:deploy-file \
+                              -DgroupId=com.example \
+                              -DartifactId=spring-boot-complete \
+                              -Dversion=0.0.1-SNAPSHOT \
+                              -Dpackaging=jar \
+                              -Dfile=target/spring-boot-complete-0.0.1-SNAPSHOT.jar \
+                              -DrepositoryId=nexus \
+                              -Durl=http://localhost:8081/repository/maven-releases/ \
+                              -Dusername=$USERNAME \
+                              -Dpassword=$PASSWORD
+                        """
+                    }
                 }
             }
         }
