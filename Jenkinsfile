@@ -22,7 +22,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'nexus-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh """
-                        mvn deploy:deploy-file \
+                        ./mvnw deploy:deploy-file \
                           -DgroupId=com.example \
                           -DartifactId=spring-boot-complete \
                           -Dversion=0.0.1-SNAPSHOT \
